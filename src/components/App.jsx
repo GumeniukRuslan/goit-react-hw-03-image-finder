@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Searchbar } from "./Searchbar/Searchbar";
-import { ImageGallery } from "./ImageGallery/ImageGallery";
-import { apiFetch } from "./Api/Api";
+// import { ImageGallery } from "./ImageGallery/ImageGallery";
+// import { apiFetch } from "./Api/Api";
 
 export class App extends Component  {
 
