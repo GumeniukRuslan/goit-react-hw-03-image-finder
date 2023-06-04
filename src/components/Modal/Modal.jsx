@@ -1,8 +1,8 @@
-export const Modal = () => {
+export const Modal = ({hugeImg, closeModal}) => {
   return (
-    <div class="overlay">
-      <div class="modal">
-        <img src="" alt="" />
+    <div onClick={closeModal} className="overlay">
+      <div className="modal">
+        <img src={hugeImg} alt="" />
       </div>
     </div>
   )
