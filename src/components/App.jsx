@@ -12,22 +12,21 @@ export class App extends Component  {
     page: 1,
     imagesArr: [],
     totalImages: 0,
-    status: false
+    status: 'idle'
   }
 
   submitHandler = async (evt) => {
     evt.preventDefault()
-    await this.setState({ searchPromt: evt.target.elements.search.value.trim(), page: 1, status: true })
+    await this.setState({ searchPromt: evt.target.elements.search.value.trim(), page: 1})
     if (!this.state.searchPromt) {
       return
     }
     try {
+      this.setState({status: 'pending'})
       const images = await apiFetch(this.state.searchPromt, this.state.page)
-      this.setState({ imagesArr: images.data.hits, totalImages: images.data.totalHits })
+      this.setState({ imagesArr: images.data.hits, totalImages: images.data.totalHits, status: 'resolved' })
     } catch (e) {
-      console.log(e)
-    } finally {
-      this.setState({status: false})
+      this.setState({status: 'rejected'})
     }
   }
 
@@ -35,7 +34,9 @@ export class App extends Component  {
     await this.setState({ page: this.state.page + 1 })
     try {
       const images = await apiFetch(this.state.searchPromt, this.state.page)
-      this.setState({ imagesArr: [...this.state.imagesArr, ...images.data.hits]})
+      this.setState(prevState => ({
+        imagesArr: [...prevState.imagesArr, ...images.data.hits]
+      }));
     } catch (e) {
       console.log(e)
     }
@@ -49,12 +50,13 @@ export class App extends Component  {
       }}
     >
         <Searchbar onSubmit={this.submitHandler} />
-        {this.state.searchPromt && <ImageGallery data={this.state.imagesArr} />}
-        {this.state.totalImages > this.state.imagesArr.length && <Button loadMore={this.loadMoreImg} />}
-        {this.state.status && <Loader />}
+
+        {this.state.status === 'idle' ? <p>Test Idle</p>
+          : this.state.status === 'pending' ? <Loader />
+          : this.state.status === 'resolved' ? <><ImageGallery data={this.state.imagesArr}/>{this.state.totalImages > this.state.imagesArr.length ? <Button loadMore={this.loadMoreImg} />: <p>thats all</p>}</>
+          : <p>test rejected</p>}
 
     </div>
   );
-
   } 
 };
