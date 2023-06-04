@@ -34,7 +34,7 @@ export class ImageGallery extends Component {
   render() {
     return (
       <>
-        <ul onClick={this.openModal}>
+        <ul className="imgage-list" onClick={this.openModal}>
           {this.props.data.map((image) => <ImageGalleryItem key={image.id} image={image} />)}
         </ul>
           
