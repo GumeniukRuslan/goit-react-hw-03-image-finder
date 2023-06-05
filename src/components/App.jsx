@@ -4,6 +4,7 @@ import { ImageGallery } from "./ImageGallery/ImageGallery";
 import { apiFetch } from "./Api/Api";
 import { Button } from "./Button/Button";
 import { Loader } from "./Loader/Loader";
+import { Message } from "./Message/Message";
 
 export class App extends Component  {
 
@@ -38,25 +39,20 @@ export class App extends Component  {
         imagesArr: [...prevState.imagesArr, ...images.data.hits]
       }));
     } catch (e) {
-      console.log(e)
+      alert('Something went wrong')
     }
   }
 
   render() {
     return (
-    <div className="container"
-      style={{
-        color: '#010101'
-      }}
-    >
+      <>
         <Searchbar onSubmit={this.submitHandler} />
-
-        {this.state.status === 'idle' ? <p>Test Idle</p>
-          : this.state.status === 'pending' ? <Loader />
-          : this.state.status === 'resolved' ? <><ImageGallery data={this.state.imagesArr}/>{this.state.totalImages > this.state.imagesArr.length ? <Button loadMore={this.loadMoreImg} />: <p>thats all</p>}</>
-          : <p>test rejected</p>}
-
-    </div>
-  );
+        <div className="container">
+          {this.state.status === 'idle' ? <Message text='Fulfill your imagination'/>
+            : this.state.status === 'pending' ? <Loader />
+            : this.state.status === 'resolved' ? <><ImageGallery data={this.state.imagesArr}/>{this.state.totalImages > this.state.imagesArr.length ? <Button loadMore={this.loadMoreImg} />: <Message text='Hope it`s fulfilled'/>}</>
+            : <Message text='Something went wrong'/>}
+        </div>
+      </>);
   } 
 };
