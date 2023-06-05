@@ -1,5 +1,7 @@
-export const Button = ({loadMore}) => {
+import css from './Button.module.css'
+
+export const Button = ({ loadMore }) => {
   return (
-    <button className="button" onClick={loadMore}>Load more</button>
+    <button className={css.button} onClick={loadMore}>Load more</button>
   )
 }

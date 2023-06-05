@@ -1,6 +1,7 @@
 import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem"
 import { Modal } from "components/Modal/Modal"
 import { Component } from "react"
+import css from './ImageGallery.module.css'
 
 export class ImageGallery extends Component {
 
@@ -10,7 +11,8 @@ export class ImageGallery extends Component {
   }
 
   openModal = (evt) => {
-    if (!evt.target.closest('.gallery-item')) {
+    if (!evt.target.closest('#item')) {
+      console.log('test')
       return
     }
     window.addEventListener("keydown", this.closeModalonESC);
@@ -25,7 +27,7 @@ export class ImageGallery extends Component {
   }
 
   closeModalonOverlay = (evt) => {
-    if (evt.target.classList.contains('overlay')) {
+    if (evt.target.hasAttribute('overlay')) {
       this.setState({ showModal: false });
       window.removeEventListener("keydown", this.closeModalonESC)
     }
@@ -34,7 +36,7 @@ export class ImageGallery extends Component {
   render() {
     return (
       <>
-        <ul className="imgage-list" onClick={this.openModal}>
+        <ul className={css.imageList} onClick={this.openModal}>
           {this.props.data.map((image) => <ImageGalleryItem key={image.id} image={image} />)}
         </ul>
           

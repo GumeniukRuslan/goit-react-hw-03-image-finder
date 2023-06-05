@@ -7,7 +7,7 @@
   z-index: 999;
 }
 
-.search-form {
+.searchForm {
   display: flex;
   margin: auto;
   max-width: 700px;
@@ -23,4 +23,15 @@
   margin-left: 10px;
   font-size: 16px;
   padding: 10px;
+}
+
+.button {
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.908);
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+  padding: 10px 20px;
 }

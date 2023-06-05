@@ -1,6 +1,8 @@
-export const ImageGalleryItem = ({image}) => {
+import css from './ImageGalleryItem.module.css'
+
+export const ImageGalleryItem = ({ image }) => {
   return (
-    <li  className="gallery-item">
+    <li id='item' className={css.galleryItem}>
       <img height='200' src={image.webformatURL} huge={image.largeImageURL} alt="" />
     </li>
   )

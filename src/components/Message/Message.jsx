@@ -1,6 +1,8 @@
-export const Message = ({text}) => {
+import css from './Message.module.css'
+
+export const Message = ({ text }) => {
   return (
-    <div className="message">
+    <div className={css.message}>
       <p>{text}</p>
     </div>
   )

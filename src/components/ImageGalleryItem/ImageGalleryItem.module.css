@@ -1,4 +1,4 @@
-.gallery-item {
+.galleryItem {
   background-color: rgba(255, 255, 255, 0.908);
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -8,7 +8,7 @@
   height: 190px;
 }
 
-.gallery-item img {
+.galleryItem img {
   object-fit: cover;
   object-position: center center;
   width: 100%;
@@ -16,6 +16,6 @@
   cursor: pointer;
 }
 
-.gallery-item img:hover {
+.galleryItem img:hover {
   transform: scale(1.05);
 }
