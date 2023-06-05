@@ -1,6 +1,7 @@
 import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem"
 import { Modal } from "components/Modal/Modal"
 import { Component } from "react"
+import PropTypes from 'prop-types';
 import css from './ImageGallery.module.css'
 
 export class ImageGallery extends Component {
@@ -9,6 +10,11 @@ export class ImageGallery extends Component {
     showModal: false,
     hugeURL: ''
   }
+
+  static propTypes = {
+        data: PropTypes.array.isRequired,
+    }
+
 
   openModal = (evt) => {
     if (!evt.target.closest('#item')) {

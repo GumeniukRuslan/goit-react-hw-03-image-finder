@@ -1,4 +1,5 @@
 import css from './ImageGalleryItem.module.css'
+import PropTypes from 'prop-types';
 
 export const ImageGalleryItem = ({ image }) => {
   return (
@@ -7,3 +8,7 @@ export const ImageGalleryItem = ({ image }) => {
     </li>
   )
 }
+
+ImageGalleryItem.propTypes = {
+  image: PropTypes.object.isRequired
+} 

@@ -1,4 +1,6 @@
 import css from './Message.module.css'
+import PropTypes from 'prop-types';
+
 
 export const Message = ({ text }) => {
   return (
@@ -7,3 +9,7 @@ export const Message = ({ text }) => {
     </div>
   )
 }
+
+Message.propTypes = {
+  text: PropTypes.string
+} 
