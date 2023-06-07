@@ -16,31 +16,35 @@ export class App extends Component  {
     status: 'idle'
   }
 
-  submitHandler = async (evt) => {
+  submitHandler = (evt) => {
     evt.preventDefault()
-    await this.setState({ searchPromt: evt.target.elements.search.value.trim(), page: 1})
-    if (!this.state.searchPromt) {
+    this.setState({ searchPromt: evt.target.elements.search.value.trim(), page: 1 }, async () => {
+      if (!this.state.searchPromt) {
       return
-    }
-    try {
-      this.setState({status: 'pending'})
-      const images = await apiFetch(this.state.searchPromt, this.state.page)
-      this.setState({ imagesArr: images.data.hits, totalImages: images.data.totalHits, status: 'resolved' })
-    } catch (e) {
-      this.setState({status: 'rejected'})
-    }
+      }
+      try {
+        this.setState({status: 'pending'})
+        const images = await apiFetch(this.state.searchPromt, this.state.page)
+        this.setState({ imagesArr: images.data.hits, totalImages: images.data.totalHits, status: 'resolved' })
+      } catch (e) {
+        this.setState({status: 'rejected'})
+      }
+    })
+    
   }
 
-  loadMoreImg = async () => {
-    await this.setState({ page: this.state.page + 1 })
-    try {
+  loadMoreImg =  () => {
+    this.setState({ page: this.state.page + 1 }, async () => {
+       try {
       const images = await apiFetch(this.state.searchPromt, this.state.page)
       this.setState(prevState => ({
         imagesArr: [...prevState.imagesArr, ...images.data.hits]
-      }));
-    } catch (e) {
-      alert('Something went wrong')
-    }
+        }));
+      } catch (e) {
+        alert('Something went wrong')
+      }
+    })
+   
   }
 
   render() {
