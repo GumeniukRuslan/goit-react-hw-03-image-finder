@@ -54,7 +54,7 @@ export class App extends Component  {
         <div className="container">
           {this.state.status === 'idle' ? <Message text='Fulfill your imagination'/>
             : this.state.status === 'pending' ? <Loader />
-            : this.state.status === 'resolved' ? <><ImageGallery data={this.state.imagesArr}/>{this.state.totalImages > this.state.imagesArr.length ? <Button loadMore={this.loadMoreImg} />: <Message text='Hope it`s fulfilled'/>}</>
+            : this.state.status === 'resolved' ? this.state.imagesArr.length === 0 ? <Message text='Nobody here but us chickens!'/> : <><ImageGallery data={this.state.imagesArr} />{this.state.totalImages > this.state.imagesArr.length ? <Button loadMore={this.loadMoreImg} />: <Message text='Hope it`s fulfilled'/>}</>
             : <Message text='Something went wrong'/>}
         </div>
       </>);
