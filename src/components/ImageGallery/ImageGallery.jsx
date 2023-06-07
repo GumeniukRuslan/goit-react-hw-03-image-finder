@@ -17,12 +17,8 @@ export class ImageGallery extends Component {
 
 
   openModal = (evt) => {
-    if (!evt.target.closest('#item')) {
-      console.log('test')
-      return
-    }
     window.addEventListener("keydown", this.closeModalonESC);
-    this.setState({hugeURL: evt.target.getAttribute('huge'), showModal: true})
+    this.setState({hugeURL: evt.currentTarget.getAttribute('huge'), showModal: true})
   }
 
   closeModalonESC = (evt) => {
@@ -42,8 +38,8 @@ export class ImageGallery extends Component {
   render() {
     return (
       <>
-        <ul className={css.imageList} onClick={this.openModal}>
-          {this.props.data.map((image) => <ImageGalleryItem key={image.id} image={image} />)}
+        <ul className={css.imageList} >
+          {this.props.data.map((image) => <ImageGalleryItem modalOpen={this.openModal} key={image.id} image={image} />)}
         </ul>
           
         {this.state.showModal && <Modal closeModal={this.closeModalonOverlay} hugeImg={this.state.hugeURL} />}

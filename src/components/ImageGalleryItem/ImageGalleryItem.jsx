@@ -1,14 +1,15 @@
 import css from './ImageGalleryItem.module.css'
 import PropTypes from 'prop-types';
 
-export const ImageGalleryItem = ({ image }) => {
+export const ImageGalleryItem = ({ image, modalOpen }) => {
   return (
-    <li id='item' className={css.galleryItem}>
-      <img height='200' src={image.webformatURL} huge={image.largeImageURL} alt="" />
+    <li onClick={modalOpen} huge={image.largeImageURL} id='item' className={css.galleryItem}>
+      <img  height='200' src={image.webformatURL}  alt="" />
     </li>
   )
 }
 
 ImageGalleryItem.propTypes = {
-  image: PropTypes.object.isRequired
+  image: PropTypes.object.isRequired,
+  modalOpen: PropTypes.func.isRequired
 } 
