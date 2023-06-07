@@ -29,7 +29,7 @@ export class ImageGallery extends Component {
   }
 
   closeModalonOverlay = (evt) => {
-    if (evt.target.hasAttribute('overlay')) {
+    if (evt.target === evt.currentTarget) {
       this.setState({ showModal: false });
       window.removeEventListener("keydown", this.closeModalonESC)
     }
