@@ -16,6 +16,8 @@ export class App extends Component  {
     status: 'idle'
   }
 
+ 
+
   submitHandler = (evt) => {
     evt.preventDefault()
     this.setState({ searchPromt: evt.target.elements.search.value.trim(), page: 1 }, async () => {
@@ -48,13 +50,14 @@ export class App extends Component  {
   }
 
   render() {
+     const {status, imagesArr, totalImages} = this.state
     return (
       <>
         <Searchbar onSubmit={this.submitHandler} />
         <div className="container">
-          {this.state.status === 'idle' ? <Message text='Fulfill your imagination'/>
-            : this.state.status === 'pending' ? <Loader />
-            : this.state.status === 'resolved' ? this.state.imagesArr.length === 0 ? <Message text='Nobody here but us chickens!'/> : <><ImageGallery data={this.state.imagesArr} />{this.state.totalImages > this.state.imagesArr.length ? <Button loadMore={this.loadMoreImg} />: <Message text='Hope it`s fulfilled'/>}</>
+          {status === 'idle' ? <Message text='Fulfill your imagination'/>
+            : status === 'pending' ? <Loader />
+            : status === 'resolved' ? imagesArr.length === 0 ? <Message text='Nobody here but us chickens!'/> : <><ImageGallery data={imagesArr} />{totalImages > imagesArr.length ? <Button loadMore={this.loadMoreImg} />: <Message text='Hope it`s fulfilled'/>}</>
             : <Message text='Something went wrong'/>}
         </div>
       </>);
